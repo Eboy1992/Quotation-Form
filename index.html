@@ -1,0 +1,553 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editable Quotation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-sm text-gray-800 font-sans">
+  <div class="max-w-5xl mx-auto p-10 bg-white"><div>
+  <!-- Header -->
+  <div class="flex justify-between items-start">
+    <div>
+      <div class="flex items-start mb-4">
+  <label class="w-24 font-bold pt-1">Date:</label>
+  <input 
+    type="date" 
+    value="2025-04-21"
+    class="border-b border-gray-400 focus:outline-none text-center w-48"
+  />
+</div>
+
+      <br/>
+      <!-- Client Address and Att'n Section -->
+<!-- Client -->
+<div class="flex items-start mb-4">
+  <label class="w-24 font-bold pt-1">Client:</label>
+  <div class="flex flex-col space-y-1">
+    <textarea
+      rows="1"
+      placeholder="Enter Client or Company Name"
+      class="w-80 resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
+             print:ring-0 print:border-none print:outline-none print:shadow-none"
+      oninput="autoExpandTextarea(this)"
+    ></textarea>
+    <textarea
+      rows="1"
+      placeholder="Enter Address"
+      class="w-80 resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
+             print:ring-0 print:border-none print:outline-none print:shadow-none"
+      oninput="autoExpandTextarea(this)"
+    ></textarea>
+  </div>
+</div>
+
+<!-- Attention -->
+<div class="flex items-start mb-4">
+  <label class="w-24 font-bold pt-1">Att'n:</label>
+  <div class="flex flex-col space-y-1">
+    <textarea
+      rows="1"
+      placeholder="Enter Name"
+      class="w-80 resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
+             print:ring-0 print:border-none print:outline-none print:shadow-none"
+      oninput="autoExpandTextarea(this)"
+    ></textarea>
+    <textarea
+      rows="1"
+      placeholder="Enter Position"
+      class="w-80 resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
+             print:ring-0 print:border-none print:outline-none print:shadow-none"
+      oninput="autoExpandTextarea(this)"
+    ></textarea>
+  </div>
+</div>
+
+      <br/>
+<!-- Subject moved closer to greeting -->
+<!-- Subject -->
+<div class="flex items-start mt-6">
+  <label class="w-24 font-bold pt-1">Subject:</label>
+  <textarea
+    rows="1"
+    placeholder="Enter subject"
+    class="w-[600px] resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
+           print:ring-0 print:border-none print:outline-none print:shadow-none"
+    oninput="autoExpandTextarea(this)"
+  ></textarea>
+</div>
+
+
+    </div>
+
+    <!-- Right Info Box -->
+    <div class="border border-gray-700 w-72 text-xs">
+      <div class="text-center font-semibold py-2 text-lg">Efficiency Matters!</div>
+      <div class="bg-gray-700 px-3 py-2 font-bold text-white text-center border-t border-b border-gray-300">QUOTATION</div>
+      <div class="px-3 py-1 border-b border-gray-300">
+        <strong>Quotation Ref.:</strong><br/>
+        <span contenteditable="true">VFI-2025-0102-0-R5</span>
+      </div>
+      <div class="px-3 py-1 border-b border-gray-300">
+        <strong>Client P.R No.:</strong><br/>
+        <span contenteditable="true">Direct</span>
+      </div>
+      <div class="px-3 py-1 border-b border-gray-300">
+        <strong>Prepared by:</strong><br/>
+        <span contenteditable="true">FEC</span>
+      </div>
+      <div class="px-3 py-1 border-b border-gray-300">
+        <strong>Email:</strong><br/>
+        <span contenteditable="true">fecient@gmail.com</span>
+      </div>
+      <div class="px-3 py-1">
+        <strong>Page(s):</strong><br/>
+        <span contenteditable="true">4</span>
+      </div>
+    </div>
+  </div>
+
+<!-- Greeting Message -->
+  <div class="mb-6">
+    <div contenteditable="true" class="whitespace-pre-line" >
+Hello Sir/Ma'am,
+
+We are pleased to submit our best offer for the following:
+    </div>
+  </div>
+
+  <div id="tables-container" class="space-y-0 mt-6">
+    <!-- Initial Table -->
+    <div class="requirement-table border border-none 0 rounded-md overflow-hidden relative">
+      <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
+        I. GENERAL REQUIREMENTS
+      </div>
+
+      <table class="w-full text-sm">
+        <thead class="bg-gray-none text-gray-800 border-b border-gray-none">
+          <tr>
+            <th class="text-left px-4 py-2 w-12">No.</th>
+            <th class="text-left px-4 py-2">Description</th>
+            <th class="text-center px-4 py-2 w-24">Qty</th>
+            <th class="text-center px-4 py-2 w-32">Amount (₱)</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr class="border-none">
+  <td class="px-4 py-2 align-top">1.0</td>
+  <td class="px-4 py-2">
+    <textarea
+    placeholder="Enter Description"
+      class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y auto-expand"
+      rows="1"oninput="autoExpandTextarea(this)"
+    ></textarea>
+  </td>
+  <td class="text-right px-4 py-2 align-top">
+    <input
+      value="1 Lot"
+      class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none"
+    />
+  </td>
+  <td class="text-right px-4 py-2 align-top">
+    <input
+      value="210000.00"
+      class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none"
+    />
+  </td>
+</tr>
+
+        </tbody>
+        <tfoot>
+          <tr class="bg-gray-none">
+            <td colspan="3" class="text-right font-bold px-4 py-2">TOTAL</td>
+            <td class="text-right px-4 py-2 font-bold total-cost">₱ 0.00</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
+        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
+        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
+      </div>
+      <button onclick="deleteTable(this)"
+              class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">
+        Delete Table
+      </button>
+    </div>
+  </div>
+  <!-- Cost Summary Table -->
+<div class="mt-8 border border-black rounded-md w-full text-sm">
+  <div class="bg-gray-700 text-white px-4 py-1 font-semibold uppercase">COST SUMMARY</div>
+  <table class="w-full text-sm border-t border-black">
+    <thead class="bg-white text-black border-b border-black">
+      <tr class="text-left">
+        <th class="px-4 py-2 w-2/3">Section</th>
+        <th class="px-4 py-2 text-right w-1/3">Subtotal (₱)</th>
+      </tr>
+    </thead>
+    <tbody id="summary-body" class="text-black"></tbody>
+    <tfoot class="text-black font-semibold">
+      <tr class="border-t border-black">
+        <td class="px-4 py-2 text-right">TOTAL AMOUNT (VAT EX):</td>
+        <td class="px-4 py-2 text-right" id="total-vat-ex">₱ 0.00</td>
+      </tr>
+      <tr class="text-red-600 font-bold border-t border-black">
+        <td class="px-4 py-2 text-right">LESS DISCOUNT :</td>
+        <td class="px-4 py-2 text-right">
+          <input id="discount-input" type="text" class="w-full text-right focus:outline-none" placeholder="Enter Discount value"/>
+        </td>
+      </tr>
+      <tr class="border-t border-black">
+        <td class="px-4 py-2 text-right">VAT 12%:
+          <select id="vat-mode" onchange="recalculateTotals()" class="ml-2 border border-gray-400 px-1 py-0.5 rounded print:hidden">
+            <option value="ex">VAT Exclusive</option>
+            <option value="in">VAT Inclusive</option>
+          </select>
+        </td>
+        <td class="px-4 py-2 text-right">
+          <input id="vat-input" type="text" class="w-full text-right focus:outline-none" placeholder="-"/>
+        </td>
+      </tr>
+      <tr class="bg-yellow-400 border-t-4 border-black text-black font-extrabold text-base">
+        <td class="px-4 py-2 text-right" id="grand-total-label">TOTAL AMOUNT VAT EX :</td>
+        <td class="px-4 py-2 text-right" id="grand-total">₱ 0.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+  <div class="mt-4 flex gap-2">
+    <button onclick="addTable()"
+            class="print:hidden px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
+      + Add Table
+    </button>
+    <button onclick="exportToExcel()" class="print:hidden px-4 py-1 bg-green-700 text-white text-sm rounded hover:bg-green-800">
+      Export to Excel
+    </button>
+    <button onclick="exportToPDF()" class="print:hidden px-4 py-1 bg-red-700 text-white text-sm rounded hover:bg-red-800">
+      Export to PDF
+    </button>
+  </div>
+<div id="notes-section">
+    <div class="requirement-table border border-none mt-4 rounded-md overflow-hidden relative" data-default="true">
+      <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
+        Additional Notes
+      </div>
+      <table class="w-full text-sm">
+        <thead class="bg-gray-100 text-gray-800 border-b border-gray-300 hidden">
+          <tr>
+            <th class="hidden">No.</th>
+            <th class="text-left px-4 py-2">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-none">
+            <td class="hidden">1.0</td>
+            <td class="px-4 py-0">
+              <textarea
+                class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y overflow-hidden auto-expand"
+                rows="1" oninput="autoExpandTextarea(this)"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
+        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
+        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
+      </div>
+      <button onclick="deleteNoteTable(this)"
+              class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">
+        Delete Table
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-4 flex gap-2">
+    <button onclick="addNoteTable()" class="print:hidden px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
+      + Add Table
+    </button>
+  </div>
+
+<script>
+function autoExpandTextarea(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+
+function addRow(button) {
+  const tbody = button.closest('.requirement-table').querySelector('tbody');
+  const rows = tbody.querySelectorAll('tr');
+  if (!rows.length) return;
+
+  const newRow = rows[0].cloneNode(true);
+  newRow.querySelectorAll('input, textarea').forEach(field => {
+    field.value = '';
+    if (field.tagName.toLowerCase() === 'textarea') {
+      field.removeAttribute('disabled');
+      field.setAttribute('oninput', 'autoExpandTextarea(this)');
+      field.rows = 1;
+      autoExpandTextarea(field);
+    }
+  });
+  newRow.querySelector('td').classList.remove('py-2');
+  newRow.querySelector('td').classList.add('py-0');
+  tbody.appendChild(newRow);
+  setTimeout(() => autoExpandTextarea(newRow.querySelector('textarea')), 0);
+}
+
+function deleteRow(button) {
+  const tbody = button.closest('.requirement-table').querySelector('tbody');
+  const rows = tbody.querySelectorAll('tr');
+  if (rows.length > 1) {
+    rows[rows.length - 1].remove();
+  } else {
+    alert("At least one row is required.");
+  }
+}
+
+function deleteNoteTable(button) {
+  const notesSection = document.getElementById('notes-section');
+  const tables = notesSection.querySelectorAll('.requirement-table');
+  if (tables.length > 1) {
+    button.closest('.requirement-table').remove();
+  } else {
+    alert("You must keep at least one Notes table.");
+  }
+}
+
+function addNoteTable() {
+  const notesSection = document.getElementById('notes-section');
+  const original = notesSection.querySelector('.requirement-table');
+  const clone = original.cloneNode(true);
+
+  clone.removeAttribute('data-default');
+
+  const tbody = clone.querySelector('tbody');
+  tbody.innerHTML = '';
+
+  const newRow = document.createElement('tr');
+  newRow.className = 'border-none';
+  newRow.innerHTML = `
+    <td class="hidden">1.0</td>
+    <td class="px-4 py-0">
+      <textarea
+        class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y overflow-hidden auto-expand"
+        rows="1" oninput="autoExpandTextarea(this)"></textarea>
+    </td>
+  `;
+  tbody.appendChild(newRow);
+
+  notesSection.appendChild(clone);
+  setTimeout(() => autoExpandTextarea(tbody.querySelector('textarea')), 0);
+}
+</script>
+<script>
+function recalculateTotals() {
+  let grandTotal = 0;
+  const summaryBody = document.getElementById('summary-body');
+  if (summaryBody) summaryBody.innerHTML = '';
+
+  document.querySelectorAll('#tables-container .requirement-table').forEach(table => {
+    let tableTotal = 0;
+    table.querySelectorAll('tbody tr').forEach(row => {
+      const inputs = row.querySelectorAll('input');
+      const amountInput = inputs[inputs.length - 1];
+      if (amountInput) {
+        const value = parseFloat(amountInput.value.replace(/,/g, ''));
+        if (!isNaN(value)) tableTotal += value;
+      }
+    });
+
+    const totalCell = table.querySelector('.total-cost');
+    if (totalCell) {
+      totalCell.textContent = '₱ ' + tableTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+    }
+
+    const title = table.querySelector('div[contenteditable="true"]')?.textContent.trim() || 'Untitled Section';
+    if (summaryBody) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="px-4 py-2">${title}</td>
+        <td class="text-right px-4 py-2">₱ ${tableTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+      `;
+      summaryBody.appendChild(tr);
+    }
+
+    grandTotal += tableTotal;
+  });
+
+  const discount = parseFloat((document.getElementById('discount-input')?.value || '0').replace(/,/g, '')) || 0;
+  const vatMode = document.getElementById('vat-mode')?.value;
+  const labelCell = document.getElementById('grand-total-label');
+
+  const net = grandTotal - discount;
+  let vatAmount = 0;
+  let finalTotal = 0;
+
+  const vatInput = document.getElementById('vat-input');
+
+  if (vatMode === 'in') {
+    vatAmount = net * 0.12;
+    finalTotal = net + vatAmount;
+    if (labelCell) labelCell.textContent = 'TOTAL AMOUNT VAT INC :';
+    if (vatInput) vatInput.value = vatAmount.toLocaleString(undefined, { minimumFractionDigits: 2 });
+  } else {
+    vatAmount = 0;
+    finalTotal = net;
+    if (labelCell) labelCell.textContent = 'TOTAL AMOUNT VAT EX :';
+    if (vatInput) vatInput.value = ''; // Clear VAT display
+  }
+
+  const totalVatEx = document.getElementById('total-vat-ex');
+  if (totalVatEx) totalVatEx.textContent = '₱ ' + net.toLocaleString(undefined, { minimumFractionDigits: 2 });
+
+  const grandTotalEl = document.getElementById('grand-total');
+  if (grandTotalEl) grandTotalEl.textContent = '₱ ' + finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+}
+
+
+window.addEventListener('load', () => {
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', recalculateTotals);
+  });
+  recalculateTotals();
+});
+ function updateRowNumbers(tbody) {
+    const rows = tbody.querySelectorAll('tr');
+    rows.forEach((row, i) => {
+      const cell = row.querySelector('td');
+      if (cell) cell.textContent = (i + 1) + '.0';
+    });
+  }
+
+function addRow(button) {
+  const tbody = button.closest('.requirement-table').querySelector('tbody');
+  const rows = tbody.querySelectorAll('tr');
+  if (!rows.length) return;
+
+  const newRow = rows[0].cloneNode(true);
+
+  // Clear all input and textarea values
+  newRow.querySelectorAll('input, textarea').forEach(field => field.value = '');
+
+  tbody.appendChild(newRow);
+  updateRowNumbers(tbody);
+  attachInputListeners(tbody);
+  recalculateTotals();
+}
+
+
+  function deleteRow(button) {
+    const tbody = button.closest('.requirement-table').querySelector('tbody');
+    const rows = tbody.querySelectorAll('tr');
+    if (rows.length > 1) {
+      rows[rows.length - 1].remove();
+      updateRowNumbers(tbody);
+      recalculateTotals();
+    } else {
+      alert("At least one row is required.");
+    }
+  }
+
+  function toRoman(num) {
+    const romanMap = [
+      ['M', 1000], ['CM', 900], ['D', 500], ['CD', 400],
+      ['C', 100], ['XC', 90], ['L', 50], ['XL', 40],
+      ['X', 10], ['IX', 9], ['V', 5], ['IV', 4], ['I', 1]
+    ];
+    let result = '';
+    for (const [roman, value] of romanMap) {
+      while (num >= value) {
+        result += roman;
+        num -= value;
+      }
+    }
+    return result;
+  }
+
+function addTable() {
+  const container = document.getElementById('tables-container');
+  const firstTable = container.querySelector('.requirement-table');
+  const newTable = firstTable.cloneNode(true);
+
+  const tableCount = container.querySelectorAll('.requirement-table').length;
+  const romanLabel = toRoman(tableCount + 1); // Auto-increment Roman numeral
+  const titleDiv = newTable.querySelector('div[contenteditable="true"]');
+  titleDiv.textContent = `${romanLabel}. ENTER TITLE HERE`; // Update heading
+
+  const tbody = newTable.querySelector('tbody');
+  const firstRow = tbody.querySelector('tr'); // ✅ move this before clearing
+  tbody.innerHTML = ''; // Clear previous rows
+
+  const newRow = firstRow.cloneNode(true);
+  newRow.querySelectorAll('input, textarea').forEach(field => field.value = ''); // reset inputs/textareas
+  tbody.appendChild(newRow);
+
+  updateRowNumbers(tbody);
+  newTable.querySelector('.total-cost').textContent = '₱ 0.00';
+
+  container.appendChild(newTable);
+  attachInputListeners(newTable);
+  recalculateTotals();
+}
+
+
+  function deleteTable(button) {
+    const container = document.getElementById('tables-container');
+    if (container.querySelectorAll('.requirement-table').length > 1) {
+      button.closest('.requirement-table').remove();
+      recalculateTotals();
+    } else {
+      alert("You must keep at least one table.");
+    }
+  }
+
+  function attachInputListeners(scope = document) {
+    scope.querySelectorAll('input').forEach(input => {
+      input.removeEventListener('input', recalculateTotals);
+      input.addEventListener('input', recalculateTotals);
+    });
+  }
+
+  function exportToExcel() {
+    const wb = XLSX.utils.book_new();
+    document.querySelectorAll('.requirement-table').forEach((tableEl, index) => {
+      const rows = [['#', 'Description', 'Qty', 'Amount (₱)']];
+      tableEl.querySelectorAll('tbody tr').forEach(tr => {
+        const inputs = tr.querySelectorAll('input');
+        const row = [tr.querySelector('td').textContent.trim(), inputs[0].value, inputs[1].value, inputs[2].value];
+        rows.push(row);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      XLSX.utils.book_append_sheet(wb, ws, `Table${index + 1}`);
+    });
+    XLSX.writeFile(wb, 'quotation.xlsx');
+  }
+
+  async function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let y = 10;
+    document.querySelectorAll('.requirement-table').forEach((tableEl, index) => {
+      doc.text(`Table ${index + 1}`, 10, y);
+      y += 6;
+      tableEl.querySelectorAll('tbody tr').forEach(tr => {
+        const inputs = tr.querySelectorAll('input');
+        const row = `${tr.querySelector('td').textContent.trim()} | ${inputs[0].value} | ${inputs[1].value} | ${inputs[2].value}`;
+        doc.text(row, 10, y);
+        y += 6;
+      });
+      y += 8;
+    });
+    doc.save('quotation.pdf');
+  }
+
+  window.addEventListener('load', () => {
+    attachInputListeners();
+    recalculateTotals();
+  });
+  
+</script>
+
+</body>
+</html>
