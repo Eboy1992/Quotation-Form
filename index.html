@@ -226,12 +226,6 @@ We are pleased to submit our best offer for the following:
             class="print:hidden px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
       + Add Table
     </button>
-    <button onclick="exportToExcel()" class="print:hidden px-4 py-1 bg-green-700 text-white text-sm rounded hover:bg-green-800">
-      Export to Excel
-    </button>
-    <button onclick="exportToPDF()" class="print:hidden px-4 py-1 bg-red-700 text-white text-sm rounded hover:bg-red-800">
-      Export to PDF
-    </button>
   </div>
 <div id="notes-section">
     <div class="requirement-table border border-none mt-4 rounded-md overflow-hidden relative" data-default="true">
@@ -262,14 +256,14 @@ We are pleased to submit our best offer for the following:
       </div>
       <button onclick="deleteNoteTable(this)"
               class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">
-        Delete Table
+        🗑️Delete Table
       </button>
     </div>
   </div>
 
   <div class="mt-4 flex gap-2">
     <button onclick="addNoteTable()" class="print:hidden px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-      + Add Table
+      ➕Add Table
     </button>
   </div>
 
@@ -495,8 +489,6 @@ function addTable() {
   attachInputListeners(newTable);
   recalculateTotals();
 }
-
-
   function deleteTable(button) {
     const container = document.getElementById('tables-container');
     if (container.querySelectorAll('.requirement-table').length > 1) {
@@ -513,46 +505,10 @@ function addTable() {
       input.addEventListener('input', recalculateTotals);
     });
   }
-
-  function exportToExcel() {
-    const wb = XLSX.utils.book_new();
-    document.querySelectorAll('.requirement-table').forEach((tableEl, index) => {
-      const rows = [['#', 'Description', 'Qty', 'Amount (₱)']];
-      tableEl.querySelectorAll('tbody tr').forEach(tr => {
-        const inputs = tr.querySelectorAll('input');
-        const row = [tr.querySelector('td').textContent.trim(), inputs[0].value, inputs[1].value, inputs[2].value];
-        rows.push(row);
-      });
-      const ws = XLSX.utils.aoa_to_sheet(rows);
-      XLSX.utils.book_append_sheet(wb, ws, `Table${index + 1}`);
-    });
-    XLSX.writeFile(wb, 'quotation.xlsx');
-  }
-
-  async function exportToPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    let y = 10;
-    document.querySelectorAll('.requirement-table').forEach((tableEl, index) => {
-      doc.text(`Table ${index + 1}`, 10, y);
-      y += 6;
-      tableEl.querySelectorAll('tbody tr').forEach(tr => {
-        const inputs = tr.querySelectorAll('input');
-        const row = `${tr.querySelector('td').textContent.trim()} | ${inputs[0].value} | ${inputs[1].value} | ${inputs[2].value}`;
-        doc.text(row, 10, y);
-        y += 6;
-      });
-      y += 8;
-    });
-    doc.save('quotation.pdf');
-  }
-
   window.addEventListener('load', () => {
     attachInputListeners();
     recalculateTotals();
   });
-  
 </script>
-
 </body>
 </html>
