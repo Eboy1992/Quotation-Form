@@ -114,73 +114,104 @@
   </div>
 
 <!-- Greeting Message -->
-  <div class="mb-6">
-    <div contenteditable="true" class="whitespace-pre-line" >
+    <div class="mb-6">
+      <div contenteditable="true" class="whitespace-pre-line">
 Hello Sir/Ma'am,
 
 We are pleased to submit our best offer for the following:
-    </div>
-  </div>
-
-  <div id="tables-container" class="space-y-0 mt-6">
-    <!-- Initial Table -->
-    <div class="requirement-table border border-none 0 rounded-md overflow-hidden relative">
-      <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
-        I. GENERAL REQUIREMENTS
       </div>
-
-      <table class="w-full text-sm">
-        <thead class="bg-gray-none text-gray-800 border-b border-gray-none">
-          <tr>
-            <th class="text-left px-4 py-2 w-12">No.</th>
-            <th class="text-left px-4 py-2">Description</th>
-            <th class="text-center px-4 py-2 w-24">Qty</th>
-            <th class="text-center px-4 py-2 w-32">Amount (₱)</th>
-          </tr>
-        </thead>
-        <tbody>
-<tr class="border-none">
-  <td class="px-4 py-2 align-top">1.0</td>
-  <td class="px-4 py-2">
-    <textarea
-    placeholder="Enter Description"
-      class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y auto-expand"
-      rows="1"oninput="autoExpandTextarea(this)"
-    ></textarea>
-  </td>
-  <td class="text-right px-4 py-2 align-top">
-    <input
-      value="1 Lot"
-      class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none"
-    />
-  </td>
-  <td class="text-right px-4 py-2 align-top">
-    <input
-      value="210000.00"
-      class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none"
-    />
-  </td>
-</tr>
-
-        </tbody>
-        <tfoot>
-          <tr class="bg-gray-none">
-            <td colspan="3" class="text-right font-bold px-4 py-2">TOTAL</td>
-            <td class="text-right px-4 py-2 font-bold total-cost">₱ 0.00</td>
-          </tr>
-        </tfoot>
-      </table>
-
-      <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
-        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
-        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
-      </div>
-      <button onclick="deleteTable(this)"
-              class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">
-        Delete Table
-      </button>
     </div>
-  </div>
+
+    <!-- Table Template (Hidden) -->
+    <div id="table-template" class="hidden">
+      <div class="requirement-table border border-none 0 rounded-md overflow-hidden relative">
+        <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
+          I. GENERAL REQUIREMENTS
+        </div>
+        <table class="w-full text-sm">
+          <thead class="bg-gray-none text-gray-800 border-b border-gray-none">
+            <tr>
+              <th class="text-left px-4 py-2 w-12">No.</th>
+              <th class="text-left px-4 py-2">Description</th>
+              <th class="text-center px-4 py-2 w-24">Qty</th>
+              <th class="text-center px-4 py-2 w-32">Amount (₱)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-none">
+              <td class="px-4 py-2 align-top">1.0</td>
+              <td class="px-4 py-2">
+                <textarea placeholder="Enter Description" class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y auto-expand" rows="1" oninput="autoExpandTextarea(this)"></textarea>
+              </td>
+              <td class="text-right px-4 py-2 align-top">
+                <input value="1 Lot" class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none" />
+              </td>
+              <td class="text-right px-4 py-2 align-top">
+                <input value="210000.00" class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none" />
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-gray-none">
+              <td colspan="3" class="text-right font-bold px-4 py-2">TOTAL</td>
+              <td class="text-right px-4 py-2 font-bold total-cost">₱ 0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
+          <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
+          <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
+        </div>
+        <button onclick="deleteTable(this)" class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">Delete Table</button>
+      </div>
+    </div>
+
+    <!-- Main Container for Tables -->
+    <div id="tables-container" class="space-y-0 mt-6">
+      <!-- Initial Table -->
+      <div class="requirement-table border border-none 0 rounded-md overflow-hidden relative">
+        <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
+          I. GENERAL REQUIREMENTS
+        </div>
+        <table class="w-full text-sm">
+          <thead class="bg-gray-none text-gray-800 border-b border-gray-none">
+            <tr>
+              <th class="text-left px-4 py-2 w-12">No.</th>
+              <th class="text-left px-4 py-2">Description</th>
+              <th class="text-center px-4 py-2 w-24">Qty</th>
+              <th class="text-center px-4 py-2 w-32">Amount (₱)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-none">
+              <td class="px-4 py-2 align-top">1.0</td>
+              <td class="px-4 py-2">
+                <textarea placeholder="Enter Description" class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y auto-expand" rows="1" oninput="autoExpandTextarea(this)"></textarea>
+              </td>
+              <td class="text-right px-4 py-2 align-top">
+                <input value="1 Lot" class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none" />
+              </td>
+              <td class="text-right px-4 py-2 align-top">
+                <input value="210000.00" class="text-center w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none" />
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-gray-none">
+              <td colspan="3" class="text-right font-bold px-4 py-2">TOTAL</td>
+              <td class="text-right px-4 py-2 font-bold total-cost">₱ 0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
+          <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
+          <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
+        </div>
+        <button onclick="deleteTable(this)" class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">Delete Table</button>
+      </div>
+    </div> 
+  </div> 
   <!-- Cost Summary Table -->
 <div class="mt-8 border border-black rounded-md w-full text-sm">
   <div class="bg-gray-700 text-white px-4 py-1 font-semibold uppercase">COST SUMMARY</div>
@@ -266,7 +297,15 @@ We are pleased to submit our best offer for the following:
       + Add Table
     </button>
   </div>
-
+<div class="mt-4 flex gap-2">
+  <button onclick="saveFormData()" class="print:hidden px-4 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700">
+    💾 Save Form Data
+  </button>
+  <label class="print:hidden px-4 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 cursor-pointer">
+    📂 Load Form Data
+    <input type="file" accept=".json" onchange="loadFormData(event)" class="hidden">
+  </label>
+</div>
 <script>
 function autoExpandTextarea(el) {
   el.style.height = 'auto';
@@ -403,14 +442,6 @@ function recalculateTotals() {
   const grandTotalEl = document.getElementById('grand-total');
   if (grandTotalEl) grandTotalEl.textContent = '₱ ' + finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
 }
-
-
-window.addEventListener('load', () => {
-  document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', recalculateTotals);
-  });
-  recalculateTotals();
-});
  function updateRowNumbers(tbody) {
     const rows = tbody.querySelectorAll('tr');
     rows.forEach((row, i) => {
@@ -514,6 +545,146 @@ function addTable() {
   });
   
 </script>
+<script>
+      function saveFormData() {
+  const formState = {
+    date: document.querySelector('input[type="date"]')?.value || '',
+    client: Array.from(document.querySelectorAll('[placeholder="Enter Client or Company Name"], [placeholder="Enter Address"]')).map(t => t.value),
+    attention: Array.from(document.querySelectorAll('[placeholder="Enter Name"], [placeholder="Enter Position"]')).map(t => t.value),
+    subject: document.querySelector('[placeholder="Enter subject"]')?.value || '',
+    headerFields: Array.from(document.querySelectorAll('.border-gray-700 span[contenteditable="true"]')).map(el => el.textContent.trim()),
+    greeting: document.querySelector('[contenteditable]:not([class*="bg-gray-700"])')?.textContent.trim() || '',
+    tables: [],
+    notes: [],
+    discount: document.getElementById('discount-input')?.value || '',
+    vatMode: document.getElementById('vat-mode')?.value || '',
+    vatInput: document.getElementById('vat-input')?.value || ''
+  };
 
+  document.querySelectorAll('#tables-container .requirement-table').forEach(table => {
+    const sectionTitle = table.querySelector('div[contenteditable="true"]')?.textContent.trim() || '';
+    const rows = Array.from(table.querySelectorAll('tbody tr')).map(tr => {
+      const tds = tr.querySelectorAll('td');
+      const inputs = tr.querySelectorAll('input, textarea');
+      return {
+        no: tds[0]?.textContent.trim() || '',
+        description: inputs[0]?.value || '',
+        qty: inputs[1]?.value || '',
+        amount: inputs[2]?.value || ''
+      };
+    });
+    formState.tables.push({ sectionTitle, rows });
+  });
+
+  document.querySelectorAll('#notes-section .requirement-table').forEach(noteTable => {
+    const notes = Array.from(noteTable.querySelectorAll('textarea')).map(t => t.value);
+    formState.notes.push(notes);
+  });
+
+  const blob = new Blob([JSON.stringify(formState, null, 2)], { type: 'application/json' });
+
+  const defaultName = 'quotation-data.json';
+  const fileName = prompt("Enter file name to save:", defaultName) || defaultName;
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fileName.endsWith('.json') ? fileName : fileName + '.json';
+  a.click();
+}
+
+
+      function loadFormData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const data = JSON.parse(e.target.result);
+            const noteTemplate = document.querySelector('.requirement-table[data-default="true"]').cloneNode(true);
+
+            document.querySelector('input[type="date"]').value = data.date || '';
+            const clientTextareas = document.querySelectorAll('[placeholder="Enter Client or Company Name"], [placeholder="Enter Address"]');
+            clientTextareas.forEach((ta, i) => ta.value = data.client?.[i] || '');
+
+            const attnTextareas = document.querySelectorAll('[placeholder="Enter Name"], [placeholder="Enter Position"]');
+            attnTextareas.forEach((ta, i) => ta.value = data.attention?.[i] || '');
+
+            document.querySelector('[placeholder="Enter subject"]').value = data.subject || '';
+            document.querySelectorAll('.border-gray-700 span[contenteditable="true"]').forEach((el, i) => {
+              el.textContent = data.headerFields?.[i] || '';
+            });
+
+            const greeting = document.querySelector('[contenteditable]:not([class*="bg-gray-700"])');
+            if (greeting) greeting.textContent = data.greeting || '';
+
+            document.getElementById('discount-input').value = data.discount || '';
+            document.getElementById('vat-mode').value = data.vatMode || '';
+            document.getElementById('vat-input').value = data.vatInput || '';
+
+            const tableContainer = document.getElementById('tables-container');
+            tableContainer.innerHTML = '';
+
+            data.tables.forEach(tbl => {
+              const tableTemplate = document.querySelector('.requirement-table').cloneNode(true);
+              tableTemplate.querySelector('div[contenteditable="true"]').textContent = tbl.sectionTitle;
+              const tbody = tableTemplate.querySelector('tbody');
+              tbody.innerHTML = '';
+              tbl.rows.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-none';
+                tr.innerHTML = `
+                  <td class="px-4 py-2 align-top">${row.no}</td>
+                  <td class="px-4 py-2">
+                    <textarea class="w-full ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none resize-y auto-expand"
+                      rows="1" oninput="autoExpandTextarea(this)">${row.description}</textarea>
+                  </td>
+                  <td class="text-right px-4 py-2 align-top">
+                    <input class="text-center w-full ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none" value="${row.qty}">
+                  </td>
+                  <td class="text-right px-4 py-2 align-top">
+                    <input class="text-center w-full ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none" value="${row.amount}">
+                  </td>
+                `;
+                tbody.appendChild(tr);
+              });
+              tableContainer.appendChild(tableTemplate);
+            });
+
+            const notesSection = document.getElementById('notes-section');
+
+// Remove only existing note tables (divs with .requirement-table)
+                const tables = notesSection.querySelectorAll('.requirement-table');
+                tables.forEach(tbl => tbl.remove());
+
+            data.notes.forEach(noteSet => {
+              const tbody = noteTemplate.querySelector('tbody');
+              tbody.innerHTML = '';
+              noteSet.forEach(note => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-none';
+                tr.innerHTML = `
+                  <td class="hidden">1.0</td>
+                  <td class="px-4 py-0">
+                    <textarea class="w-full ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none resize-y overflow-hidden auto-expand"
+                      rows="1" oninput="autoExpandTextarea(this)">${note}</textarea>
+                  </td>
+                `;
+                tbody.appendChild(tr);
+              });
+              notesSection.appendChild(noteTemplate);
+            });
+
+            attachInputListeners();
+            recalculateTotals();
+          } catch (err) {
+            alert("Invalid JSON file.");
+            console.error(err);
+          }
+        };
+        reader.readAsText(file);
+      }
+    </script>
+  </div>
 </body>
 </html>
