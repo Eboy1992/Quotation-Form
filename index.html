@@ -172,12 +172,12 @@ We are pleased to submit our best offer for the following:
       </table>
 
       <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
-        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">➕Add Row</button>
-        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">🗑️Delete Row</button>
+        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
+        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
       </div>
       <button onclick="deleteTable(this)"
               class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">
-        🗑️Delete Table
+        Delete Table
       </button>
     </div>
   </div>
@@ -224,7 +224,7 @@ We are pleased to submit our best offer for the following:
   <div class="mt-4 flex gap-2">
     <button onclick="addTable()"
             class="print:hidden px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-      ➕📋Add Table
+      + Add Table
     </button>
   </div>
 <div id="notes-section">
@@ -251,26 +251,19 @@ We are pleased to submit our best offer for the following:
         </tbody>
       </table>
       <div class="flex justify-end gap-2 px-4 py-2 print:hidden">
-        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">➕Add Row</button>
-        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">🗑️Delete Row</button>
+        <button onclick="addRow(this)" class="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700">+ Add Row</button>
+        <button onclick="deleteRow(this)" class="bg-red-600 text-white px-2 py-1 text-xs rounded hover:bg-red-700">− Delete Row</button>
       </div>
       <button onclick="deleteNoteTable(this)"
               class="print:hidden absolute top-2 right-2 text-xs text-white font-semibold bg-red-600 rounded hover:bg-red-800">
-        🗑️📋Delete Table
-      </button>
-      <button onclick="saveToFile()" class="px-4 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
-        💾 Save
-      </button>
-      <input type="file" id="loadFile" accept=".json" class="hidden" onchange="loadFromFile(event)">
-      <button onclick="document.getElementById('loadFile').click()" class="px-4 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600">
-        📂 Load
+        Delete Table
       </button>
     </div>
   </div>
 
   <div class="mt-4 flex gap-2">
     <button onclick="addNoteTable()" class="print:hidden px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-      ➕📋Add Table
+      + Add Table
     </button>
   </div>
 
@@ -496,6 +489,8 @@ function addTable() {
   attachInputListeners(newTable);
   recalculateTotals();
 }
+
+
   function deleteTable(button) {
     const container = document.getElementById('tables-container');
     if (container.querySelectorAll('.requirement-table').length > 1) {
@@ -512,10 +507,13 @@ function addTable() {
       input.addEventListener('input', recalculateTotals);
     });
   }
+
   window.addEventListener('load', () => {
     attachInputListeners();
     recalculateTotals();
   });
+  
 </script>
+
 </body>
 </html>
