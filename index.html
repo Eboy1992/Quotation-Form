@@ -5,9 +5,156 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Editable Quotation</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FONT FOR SCREEN + PRINT -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+<style>
+    @media print {
+      @page {
+        margin: 0.5in;
+      }
+
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      #quotation-wrapper,
+      #quotation-wrapper * {
+        visibility: visible;
+      }
+
+      #quotation-wrapper {
+        width: 900px !important;
+        max-width: 900px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        position: relative;
+      }
+
+      .max-w-6xl,
+      .max-w-5xl,
+      .p-6,
+      .px-10 {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .right-info-box {
+        float: none !important;
+        display: inline-block !important;
+        vertical-align: top;
+        margin-left: 0 !important;
+        width: 260px !important;
+        font-size: 10px !important;
+        box-sizing: border-box;
+        color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        border: 1px solid #1f2937 !important;
+      }
+
+      .right-info-box .header {
+        background-color: #374151 !important;
+        color: white !important;
+        border-top: 1px solid #d1d5db !important;
+        border-bottom: 1px solid #d1d5db !important;
+      }
+
+      .right-info-box .section {
+        padding: 4px 8px;
+        border-bottom: 1px solid #d1d5db !important;
+      }
+
+      #quotation-info {
+        width: 400px !important;
+        max-width: 400px !important;
+        margin-bottom: 16px;
+      }
+
+      .requirement-table,
+      .note-table,
+      .editable-table,
+      .right-info-box,
+      .cost-summary-table {
+        page-break-inside: avoid;
+      }
+
+      .cost-summary {
+        page-break-before: always;
+      }
+
+      .section-title-print {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #999 !important;
+        margin-top: 20px !important;
+        margin-bottom: 8px !important;
+      }
+
+      .add-table-button {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
+      .notes-section table td {
+        white-space: pre-wrap;
+      }
+
+      button,
+      input[type="file"],
+      .no-print {
+        display: none !important;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 12px;
+      }
+
+      table th,
+      table td {
+        border: 1px solid #d1d5db;
+        padding: 6px 10px;
+        vertical-align: top;
+        text-align: left;
+        word-break: break-word;
+      }
+
+      table th {
+        background-color: #f3f4f6;
+        font-weight: 600;
+      }
+
+      .editable-table-title {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      .tables-container,
+      .notes-section,
+      .cost-summary {
+        width: 900px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+
 </head>
 <body class="bg-gray-100 text-sm text-gray-800 font-sans">
-  <div class="max-w-5xl mx-auto p-10 bg-white"><div>
+<div id="quotation-wrapper" class="bg-white p-6  max-w-screen-lg mx-auto ">
+  <div class="max-w-6xl mx-auto p-6 bg-white">
 <div class="bg-white py-4 mb-4">
   <div class="max-w-5xl mx-auto px-10 flex justify-center">
     <img src="images/header.png" alt="Company Header" class="w-full max-h-40 object-contain" />
@@ -77,7 +224,7 @@
   <textarea
     rows="1"
     placeholder="Enter subject"
-    class="w-[600px] resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
+    class="w-[500px] resize-none overflow-hidden ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none
            print:ring-0 print:border-none print:outline-none print:shadow-none"
     oninput="autoExpandTextarea(this)"
   ></textarea>
@@ -87,40 +234,58 @@
     </div>
 
     <!-- Right Info Box -->
-    <div class="border border-gray-700 w-72 text-xs">
-      <div class="text-center font-semibold py-2 text-lg">Efficiency Matters!</div>
-      <div class="bg-gray-700 px-3 py-2 font-bold text-white text-center border-t border-b border-gray-300">QUOTATION</div>
-      <div class="px-3 py-1 border-b border-gray-300">
+<body class="bg-gray-100 text-sm">
+  <div class="flex items-start">
+    <div class="right-info-box w-[320px] border border-gray-700 text-xs print:w-[320px] print:border print:border-gray-700 print:text-[10px] print:box-border">
+      <!-- Top Tagline -->
+      <div class="text-center font-semibold py-2 text-lg print:text-base print:py-1">
+        Efficiency Matters!
+      </div>
+
+      <!-- Header -->
+      <div class="bg-gray-700 px-3 py-2 font-bold text-white text-center border-t border-b border-gray-300 print:bg-gray-700 print:text-white print:border-t print:border-b print:border-gray-300">
+        QUOTATION
+      </div>
+
+      <!-- Info Rows -->
+      <div class="px-3 py-1 border-b border-gray-300 print:border-b print:border-gray-300">
         <strong>Quotation Ref.:</strong><br/>
         <span contenteditable="true">VFI-2025-0102-0-R5</span>
       </div>
-      <div class="px-3 py-1 border-b border-gray-300">
+
+      <div class="px-3 py-1 border-b border-gray-300 print:border-b print:border-gray-300">
         <strong>Client P.R No.:</strong><br/>
         <span contenteditable="true">Direct</span>
       </div>
-      <div class="px-3 py-1 border-b border-gray-300">
+
+      <div class="px-3 py-1 border-b border-gray-300 print:border-b print:border-gray-300">
         <strong>Prepared by:</strong><br/>
         <span contenteditable="true">FEC</span>
       </div>
-      <div class="px-3 py-1 border-b border-gray-300">
+
+      <div class="px-3 py-1 border-b border-gray-300 print:border-b print:border-gray-300">
         <strong>Email:</strong><br/>
         <span contenteditable="true">fecient@gmail.com</span>
       </div>
-      <div class="px-3 py-1">
+
+      <div class="px-3 py-1 print:border-0">
         <strong>Page(s):</strong><br/>
         <span contenteditable="true">4</span>
       </div>
     </div>
+
+
+  </div>
   </div>
 
 <!-- Greeting Message -->
-    <div class="mb-6">
-      <div contenteditable="true" class="whitespace-pre-line">
-Hello Sir/Ma'am,
+    <div id="greeting-message" class="mb-6">
+  <div id="greeting-text" contenteditable="true" class="whitespace-pre-line">
+    Hello Sir/Ma'am,
 
-We are pleased to submit our best offer for the following:
-      </div>
-    </div>
+    We are pleased to submit our best offer for the following:
+  </div>
+</div>
 
     <!-- Table Template (Hidden) -->
     <div id="table-template" class="hidden">
@@ -168,7 +333,7 @@ We are pleased to submit our best offer for the following:
     </div>
 
     <!-- Main Container for Tables -->
-    <div id="tables-container" class="space-y-0 mt-6">
+    <div id="tables-container" class="space-y-6 mt-4 w-[900px] mx-auto">
       <!-- Initial Table -->
       <div class="requirement-table border border-none 0 rounded-md overflow-hidden relative">
         <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
@@ -213,7 +378,7 @@ We are pleased to submit our best offer for the following:
     </div> 
   </div> 
   <!-- Cost Summary Table -->
-<div class="mt-8 border border-black rounded-md w-full text-sm">
+<div class="mt-8 border border-black rounded-md w-[900px] mx-auto text-sm">
   <div class="bg-gray-700 text-white px-4 py-1 font-semibold uppercase">COST SUMMARY</div>
   <table class="w-full text-sm border-t border-black">
     <thead class="bg-white text-black border-b border-black">
@@ -259,7 +424,7 @@ We are pleased to submit our best offer for the following:
     </button>
   </div>
 <div id="notes-section">
-    <div class="requirement-table border border-none mt-4 rounded-md overflow-hidden relative" data-default="true">
+    <div class="requirement-table border border-none mt-4 rounded-md overflow-hidden relative w-[900px] mx-auto" data-default="true">
       <div contenteditable="true" class="bg-gray-700 text-white px-4 py-2 font-semibold">
         Additional Notes
       </div>
@@ -298,11 +463,11 @@ We are pleased to submit our best offer for the following:
     </button>
   </div>
 <div class="mt-4 flex gap-2">
-  <button onclick="saveFormData()" class="print:hidden px-4 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700">
-    💾 Save Form Data
+  <button onclick="saveFormData()" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded">
+    💾 Save
   </button>
   <label class="print:hidden px-4 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 cursor-pointer">
-    📂 Load Form Data
+    📂 Load
     <input type="file" accept=".json" onchange="loadFormData(event)" class="hidden">
   </label>
 </div>
@@ -518,6 +683,7 @@ function addTable() {
 
   container.appendChild(newTable);
   attachInputListeners(newTable);
+  attachTitleListeners();
   recalculateTotals();
 }
 
@@ -538,10 +704,19 @@ function addTable() {
       input.addEventListener('input', recalculateTotals);
     });
   }
+  function attachTitleListeners(scope = document) {
+  scope.querySelectorAll('#tables-container .requirement-table div[contenteditable="true"]').forEach(titleDiv => {
+    titleDiv.removeEventListener('input', recalculateTotals);
+    titleDiv.addEventListener('input', recalculateTotals);
+  });
+  }
 
   window.addEventListener('load', () => {
     attachInputListeners();
+    attachTitleListeners(); // ✅ Initial load title edit detection
     recalculateTotals();
+    // Add a second note table by default on page load
+  addNoteTable();
   });
   
 </script>
@@ -553,7 +728,7 @@ function addTable() {
     attention: Array.from(document.querySelectorAll('[placeholder="Enter Name"], [placeholder="Enter Position"]')).map(t => t.value),
     subject: document.querySelector('[placeholder="Enter subject"]')?.value || '',
     headerFields: Array.from(document.querySelectorAll('.border-gray-700 span[contenteditable="true"]')).map(el => el.textContent.trim()),
-    greeting: document.querySelector('[contenteditable]:not([class*="bg-gray-700"])')?.textContent.trim() || '',
+    greeting: document.querySelector('#greeting-message [contenteditable]')?.innerText.trim() || '',
     tables: [],
     notes: [],
     discount: document.getElementById('discount-input')?.value || '',
@@ -577,19 +752,17 @@ function addTable() {
   });
 
   document.querySelectorAll('#notes-section .requirement-table').forEach(noteTable => {
-    const notes = Array.from(noteTable.querySelectorAll('textarea')).map(t => t.value);
-    formState.notes.push(notes);
-  });
+  const sectionTitle = noteTable.querySelector('div[contenteditable="true"]')?.textContent.trim() || 'Additional Notes';
+  const notes = Array.from(noteTable.querySelectorAll('textarea')).map(t => t.value);
+  formState.notes.push({ sectionTitle, notes });
+});
+
 
   const blob = new Blob([JSON.stringify(formState, null, 2)], { type: 'application/json' });
 
   const defaultName = 'quotation-data.json';
-  const fileName = prompt("Enter file name to save:", defaultName) || defaultName;
-
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = fileName.endsWith('.json') ? fileName : fileName + '.json';
-  a.click();
+  window.temporaryBlob = blob; // Store it temporarily until user enters file name
+openSaveModal();
 }
 
 
@@ -601,7 +774,7 @@ function addTable() {
         reader.onload = function(e) {
           try {
             const data = JSON.parse(e.target.result);
-            const noteTemplate = document.querySelector('.requirement-table[data-default="true"]').cloneNode(true);
+            const originalNote = document.querySelector('.requirement-table[data-default="true"]');
 
             document.querySelector('input[type="date"]').value = data.date || '';
             const clientTextareas = document.querySelectorAll('[placeholder="Enter Client or Company Name"], [placeholder="Enter Address"]');
@@ -615,8 +788,9 @@ function addTable() {
               el.textContent = data.headerFields?.[i] || '';
             });
 
-            const greeting = document.querySelector('[contenteditable]:not([class*="bg-gray-700"])');
-            if (greeting) greeting.textContent = data.greeting || '';
+            const greeting = document.querySelector('#greeting-message [contenteditable]');
+if (greeting && data.greeting) greeting.innerText = data.greeting;
+
 
             document.getElementById('discount-input').value = data.discount || '';
             document.getElementById('vat-mode').value = data.vatMode || '';
@@ -657,26 +831,40 @@ function addTable() {
                 const tables = notesSection.querySelectorAll('.requirement-table');
                 tables.forEach(tbl => tbl.remove());
 
-            data.notes.forEach(noteSet => {
-              const tbody = noteTemplate.querySelector('tbody');
-              tbody.innerHTML = '';
-              noteSet.forEach(note => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-none';
-                tr.innerHTML = `
-                  <td class="hidden">1.0</td>
-                  <td class="px-4 py-0">
-                    <textarea class="w-full ring-2 ring-blue-300 focus:ring-blue-500 rounded focus:outline-none resize-y overflow-hidden auto-expand"
-                      rows="1" oninput="autoExpandTextarea(this)">${note}</textarea>
-                  </td>
-                `;
-                tbody.appendChild(tr);
-              });
-              notesSection.appendChild(noteTemplate);
-            });
+            data.notes.forEach(noteGroup => {
+  const noteClone = originalNote.cloneNode(true);
+  const titleDiv = noteClone.querySelector('div[contenteditable="true"]');
+  if (titleDiv) titleDiv.textContent = noteGroup.sectionTitle || 'Additional Notes';
+
+  const tbody = noteClone.querySelector('tbody');
+  tbody.innerHTML = '';
+  noteGroup.notes.forEach(note => {
+    const tr = document.createElement('tr');
+    tr.className = 'border-none';
+    tr.innerHTML = `
+      <td class="hidden">1.0</td>
+      <td class="px-4 py-0">
+        <textarea class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y overflow-hidden auto-expand"
+          rows="1" oninput="autoExpandTextarea(this)">${note}</textarea>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  notesSection.appendChild(noteClone);
+});
+
 
             attachInputListeners();
             recalculateTotals();
+            attachTitleListeners(); // 🔁 Reconnect section title edits
+            // ✅ Auto-resize all textareas after loading JSON
+setTimeout(() => {
+  document.querySelectorAll("textarea").forEach((textarea) => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  });
+}, 0);
           } catch (err) {
             alert("Invalid JSON file.");
             console.error(err);
@@ -684,7 +872,58 @@ function addTable() {
         };
         reader.readAsText(file);
       }
+      function openSaveModal() {
+  document.getElementById("fileNameInput").value = "";
+  document.getElementById("saveModal").classList.remove("hidden");
+}
+
+function closeSaveModal() {
+  document.getElementById("saveModal").classList.add("hidden");
+}
+
+function confirmSave() {
+  const fileName = document.getElementById("fileNameInput").value.trim();
+  if (!fileName || !window.temporaryBlob) return;
+
+  closeSaveModal();
+  performSave(fileName);
+}
+
+async function performSave(fileName) {
+  try {
+    const options = {
+      suggestedName: fileName.endsWith('.json') ? fileName : fileName + '.json',
+      types: [{
+        description: 'JSON Files',
+        accept: { 'application/json': ['.json'] }
+      }]
+    };
+
+    const handle = await window.showSaveFilePicker(options);
+    const writable = await handle.createWritable();
+    await writable.write(window.temporaryBlob);
+    await writable.close();
+
+    alert('File saved successfully!');
+    window.temporaryBlob = null;
+  } catch (err) {
+    console.error('Save cancelled or failed:', err);
+  }
+}
+
+
     </script>
   </div>
+  <div id="saveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md space-y-4">
+    <h2 class="text-lg font-bold text-gray-700">Save Quotation</h2>
+    <input type="text" id="fileNameInput" placeholder="Enter file name..." class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500" />
+    <div class="flex justify-end gap-2">
+      <button onclick="closeSaveModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+      <button onclick="confirmSave()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+    </div>
+  </div>
+</div>
+</div> <!-- End of #quotation-wrapper -->
 </body>
 </html>
