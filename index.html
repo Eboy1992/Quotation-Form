@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -148,7 +148,29 @@
         width: 900px;
         margin: 0 auto;
       }
-    }
+      th.resizable {
+        position: relative;
+      }
+      th.resizable .resizer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        cursor: col-resize;
+        user-select: none;
+      }
+      input, textarea {
+        background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: black !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: auto !important;
+  }
+          }
   </style>
 
 </head>
@@ -296,15 +318,27 @@
         <table class="w-full text-sm">
           <thead class="bg-gray-none text-gray-800 border-b border-gray-none">
             <tr>
-              <th class="text-left px-4 py-2 w-12">No.</th>
-              <th class="text-left px-4 py-2">Description</th>
-              <th class="text-center px-4 py-2 w-24">Qty</th>
-              <th class="text-center px-4 py-2 w-32">Amount (₱)</th>
+              <th class="resizable text-left px-4 py-2 w-12">
+                No.
+                <div class="resizer"></div>
+              </th>
+              <th class="resizable text-left px-4 py-2">
+                Description
+                <div class="resizer"></div>
+              </th>
+              <th class="resizable text-center px-4 py-2 w-24">
+                Qty
+                <div class="resizer"></div>
+              </th>
+              <th class="resizable text-center px-4 py-2 w-32">
+                Amount (₱)
+                <div class="resizer"></div>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr class="border-none">
-              <td class="px-4 py-2 align-top">1.0</td>
+              <td class="px-4 py-2 align-top">1.</td>
               <td class="px-4 py-2">
                 <textarea placeholder="Enter Description" class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y auto-expand" rows="1" oninput="autoExpandTextarea(this)"></textarea>
               </td>
@@ -342,15 +376,27 @@
         <table class="w-full text-sm">
           <thead class="bg-gray-none text-gray-800 border-b border-gray-none">
             <tr>
-              <th class="text-left px-4 py-2 w-12">No.</th>
-              <th class="text-left px-4 py-2">Description</th>
-              <th class="text-center px-4 py-2 w-24">Qty</th>
-              <th class="text-center px-4 py-2 w-32">Amount (₱)</th>
+              <th class="resizable text-left px-4 py-2 w-12">
+                No.
+                <div class="resizer"></div>
+              </th>
+              <th class="resizable text-left px-4 py-2">
+                Description
+                <div class="resizer"></div>
+              </th>
+              <th class="resizable text-center px-4 py-2 w-24">
+                Qty
+                <div class="resizer"></div>
+              </th>
+              <th class="resizable text-center px-4 py-2 w-32">
+                Amount (₱)
+                <div class="resizer"></div>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr class="border-none">
-              <td class="px-4 py-2 align-top">1.0</td>
+              <td class="px-4 py-2 align-top">1.</td>
               <td class="px-4 py-2">
                 <textarea placeholder="Enter Description" class="w-full ring-2 ring-blue-300 focus:ring-2 focus:ring-blue-500 rounded focus:outline-none print:ring-0 print:outline-none resize-y auto-expand" rows="1" oninput="autoExpandTextarea(this)"></textarea>
               </td>
@@ -666,27 +712,30 @@ function addTable() {
   const newTable = firstTable.cloneNode(true);
 
   const tableCount = container.querySelectorAll('.requirement-table').length;
-  const romanLabel = toRoman(tableCount + 1); // Auto-increment Roman numeral
+  const romanLabel = toRoman(tableCount + 1);
   const titleDiv = newTable.querySelector('div[contenteditable="true"]');
-  titleDiv.textContent = `${romanLabel}. ENTER TITLE HERE`; // Update heading
+  titleDiv.textContent = `${romanLabel}. ENTER TITLE HERE`;
 
   const tbody = newTable.querySelector('tbody');
-  const firstRow = tbody.querySelector('tr'); // ✅ move this before clearing
-  tbody.innerHTML = ''; // Clear previous rows
+  const firstRow = tbody.querySelector('tr');
+  tbody.innerHTML = '';
 
   const newRow = firstRow.cloneNode(true);
-  newRow.querySelectorAll('input, textarea').forEach(field => field.value = ''); // reset inputs/textareas
+  newRow.querySelectorAll('input, textarea').forEach(field => field.value = '');
   tbody.appendChild(newRow);
 
   updateRowNumbers(tbody);
   newTable.querySelector('.total-cost').textContent = '₱ 0.00';
 
   container.appendChild(newTable);
+
+  // 🟢 Required for new table: resizable columns
+  makeColumnsResizable(newTable.querySelector('table'));
+
   attachInputListeners(newTable);
   attachTitleListeners();
   recalculateTotals();
 }
-
 
   function deleteTable(button) {
     const container = document.getElementById('tables-container');
@@ -738,6 +787,10 @@ function addTable() {
 
   document.querySelectorAll('#tables-container .requirement-table').forEach(table => {
     const sectionTitle = table.querySelector('div[contenteditable="true"]')?.textContent.trim() || '';
+    
+    // ✅ Get column widths
+    const colWidths = Array.from(table.querySelectorAll('th')).map(th => th.offsetWidth);
+
     const rows = Array.from(table.querySelectorAll('tbody tr')).map(tr => {
       const tds = tr.querySelectorAll('td');
       const inputs = tr.querySelectorAll('input, textarea');
@@ -748,21 +801,21 @@ function addTable() {
         amount: inputs[2]?.value || ''
       };
     });
-    formState.tables.push({ sectionTitle, rows });
+
+    formState.tables.push({ sectionTitle, rows, colWidths });
   });
 
   document.querySelectorAll('#notes-section .requirement-table').forEach(noteTable => {
-  const sectionTitle = noteTable.querySelector('div[contenteditable="true"]')?.textContent.trim() || 'Additional Notes';
-  const notes = Array.from(noteTable.querySelectorAll('textarea')).map(t => t.value);
-  formState.notes.push({ sectionTitle, notes });
-});
-
+    const sectionTitle = noteTable.querySelector('div[contenteditable="true"]')?.textContent.trim() || 'Additional Notes';
+    const notes = Array.from(noteTable.querySelectorAll('textarea')).map(t => t.value);
+    formState.notes.push({ sectionTitle, notes });
+  });
 
   const blob = new Blob([JSON.stringify(formState, null, 2)], { type: 'application/json' });
 
   const defaultName = 'quotation-data.json';
   window.temporaryBlob = blob; // Store it temporarily until user enters file name
-openSaveModal();
+  openSaveModal();
 }
 
 
@@ -822,6 +875,15 @@ if (greeting && data.greeting) greeting.innerText = data.greeting;
                 `;
                 tbody.appendChild(tr);
               });
+               // ✅ Apply saved column widths here
+  if (tbl.colWidths && Array.isArray(tbl.colWidths)) {
+    const ths = tableTemplate.querySelectorAll('th');
+    tbl.colWidths.forEach((width, i) => {
+      if (ths[i]) {
+        ths[i].style.width = width + 'px';
+      }
+    });
+  }
               tableContainer.appendChild(tableTemplate);
             });
 
@@ -865,6 +927,14 @@ setTimeout(() => {
     textarea.style.height = textarea.scrollHeight + "px";
   });
 }, 0);
+// ✅ Remove any existing resizers first
+document.querySelectorAll('.column-resizer').forEach(resizer => resizer.remove());
+
+// ✅ Reattach column resizers to restored tables
+document.querySelectorAll('.requirement-table table').forEach(table => {
+  makeColumnsResizable(table);
+});
+
           } catch (err) {
             alert("Invalid JSON file.");
             console.error(err);
@@ -925,5 +995,60 @@ async function performSave(fileName) {
   </div>
 </div>
 </div> <!-- End of #quotation-wrapper -->
+<script>
+function makeColumnsResizable(table) {
+  table.querySelectorAll('.column-resizer').forEach(resizer => resizer.remove());
+
+  const headerRow = table.querySelector('thead tr') || table.rows[0];
+  if (!headerRow) return;
+
+  const cols = headerRow.children;
+
+  for (let i = 0; i < cols.length; i++) {
+    const col = cols[i];
+    col.style.position = 'relative';
+
+    const resizer = document.createElement('div');
+    resizer.className = 'column-resizer';
+    resizer.style.width = '5px';
+    resizer.style.height = '100%';
+    resizer.style.position = 'absolute';
+    resizer.style.right = '0';
+    resizer.style.top = '0';
+    resizer.style.cursor = 'col-resize';
+    resizer.style.userSelect = 'none';
+    resizer.style.zIndex = '10';
+
+    resizer.addEventListener('mousedown', initResize);
+
+    col.appendChild(resizer);
+
+    function initResize(e) {
+      e.preventDefault();
+      const startX = e.pageX;
+      const startWidth = col.offsetWidth;
+
+      function doResize(e) {
+        const newWidth = startWidth + (e.pageX - startX);
+        col.style.width = newWidth + 'px';
+      }
+
+      function stopResize() {
+        window.removeEventListener('mousemove', doResize);
+        window.removeEventListener('mouseup', stopResize);
+      }
+
+      window.addEventListener('mousemove', doResize);
+      window.addEventListener('mouseup', stopResize);
+    }
+  }
+}
+
+// 🟢 Apply on load to all existing tables
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.requirement-table table').forEach(makeColumnsResizable);
+});
+</script>
+
 </body>
 </html>
